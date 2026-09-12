@@ -44,3 +44,12 @@ con try/except y control de versiones en Git y GitHub.
 
   - Guardar y recuperar los datos.
   - Agregar pruebas automáticas.
+
+  ## Pruebas automáticas
+ 
+ Para ejecutar las pruebas del cálculo de saldo:
+ ''' bash
+ python -m unittest -v
+ '''
+
+ Se comprueban pagos parciales, cancelaciónes de deuda y saldo a favor.

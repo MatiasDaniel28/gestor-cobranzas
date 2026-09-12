@@ -1,14 +1,10 @@
 import json
-
-
-def calcular_saldo(deuda, pago):
-     return deuda - pago
-
+from calculos import calcular_saldo
 
 
 def mostrar_saldo(cliente, saldo):
     if saldo < 0:
-        print(f"saldo a favor ${abs(saldo):.2f}")
+        print(f"{cliente}: saldo a favor ${abs(saldo):.2f}")
     else:
         print(f"{cliente}: saldo pendiente ${saldo:.2f}")
 
@@ -20,7 +16,7 @@ print ("===Gestor de cobranzas ===")
 try:
     with open("consultas.json", "r", encoding="utf-8") as archivo:
         consultas = json.load(archivo)
-except FileNotFoundErrir:
+except FileNotFoundError:
     consultas = []
 except json.JSONDecodeError:
     print("El archivo tiene un formato inválido. Revisalo antes de contuinuar.")
