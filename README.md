@@ -14,7 +14,8 @@ de un clinete a partir de una deuda incial y un pago.
 - Guarda las consultas en JSON al salir y las recupera al iniciar.
 - Rechaza nombres vacíos o compuestos únicamente por espacios.
 - Distingue entre saldo pendiente y saldo a favor.
-- Valida la respuesta para continuar: solo acepta s o n.
+- Menú para registrar consultas, ver el historial y guardar al salir.
+- Rechaza opciones de menú inválidas.
 
 ## Cómo ejecutarlo
 
@@ -43,7 +44,6 @@ con try/except y control de versiones en Git y GitHub.
   ## Próximas mejoras
 
   - Guardar y recuperar los datos.
-  - Agregar pruebas automáticas.
 
   ## Pruebas automáticas
  

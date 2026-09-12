@@ -9,9 +9,7 @@ def mostrar_saldo(cliente, saldo):
         print(f"{cliente}: saldo pendiente ${saldo:.2f}")
 
 
-
-
-print ("===Gestor de cobranzas ===")
+print("=== Gestor de cobranzas ===")
 
 try:
     with open("consultas.json", "r", encoding="utf-8") as archivo:
@@ -19,62 +17,73 @@ try:
 except FileNotFoundError:
     consultas = []
 except json.JSONDecodeError:
-    print("El archivo tiene un formato inválido. Revisalo antes de contuinuar.")
+    print("El archivo tiene un formato inválido. Revisalo antes de continuar.")
     raise SystemExit
 
 while True:
+    print("\n=== Menú ===")
+    print("1. Registrar consulta")
+    print("2. Ver historial")
+    print("3. Guardar y salir")
 
-    cliente = input("Nombre del cliente: ").strip()
+    opcion = input("Elegí una opción: ").strip()
 
-    if not cliente:
-        print("Error: ingresá un nombre.")
-        continue
+    if opcion == "1":
+        cliente = input("Nombre del cliente: ").strip()
 
-    try:
-        deuda = float(input("Deuda inicial: "))
-        pago = float(input("Pago recibido: "))
-    except ValueError:
-        print("Error: ingresá números. Para decimales, usá punto.")
-    else:
-        
-        if deuda < 0 or pago <0:
-            print("Error: La deuda y el pago no pueden ser negativos.")
+        if not cliente:
+            print("Error: ingresá un nombre.")
+            continue
+
+        try:
+            deuda = float(input("Deuda inicial: "))
+            pago = float(input("Pago recibido: "))
+        except ValueError:
+            print("Error: ingresá números. Para decimales, usá punto.")
+            continue
+
+        if deuda < 0 or pago < 0:
+            print("Error: la deuda y el pago no pueden ser negativos.")
+            continue
+
+        saldo = calcular_saldo(deuda, pago)
+
+        consulta = {
+            "cliente": cliente,
+            "deuda": deuda,
+            "pago": pago,
+            "saldo": saldo,
+        }
+        consultas.append(consulta)
+
+        if saldo == 0:
+            print("Deuda cancelada")
+        elif saldo > 0:
+            print("Todavía tiene deuda")
         else:
-            saldo = calcular_saldo(deuda, pago)
-            consulta = {
-                "cliente": cliente,
-                "deuda": deuda,
-                "pago": pago,
-                "saldo": saldo,
-            }
-            consultas.append(consulta)
-            if saldo == 0:
-                print("Deuda Cancelada")
-            elif saldo > 0 :
-                print("Todavia tiene deuda")
-            else:
-                print("El pago supera la deuda")
+            print("El pago supera la deuda")
 
-            mostrar_saldo(cliente, saldo)
+        mostrar_saldo(cliente, saldo)
 
-    while True:
-        continuar = input("\n¿Consutar otro cliente? (s/n): ").strip().lower()
-        if continuar in ("s", "n"):
-                break
-        print ("Respuesta inválida: escribí s o n.")
-    if continuar == "n":
-                print("Gracias por usar el gestor.")
-                break
+    elif opcion == "2":
+        print("\n=== Historial de consultas ===")
 
-print("\n=== Resumen de consultas ===")
+        if not consultas:
+            print("Todavía no hay consultas.")
+        else:
+            for consulta in consultas:
+                mostrar_saldo(consulta["cliente"], consulta["saldo"])
 
-for consulta in consultas:
-     mostrar_saldo(consulta["cliente"], consulta["saldo"])
+    elif opcion == "3":
+        try:
+            with open("consultas.json", "w", encoding="utf-8") as archivo:
+                json.dump(consultas, archivo, ensure_ascii=False, indent=4)
+        except OSError:
+            print("No se pudieron guardar las consultas. Intentá nuevamente.")
+        else:
+            print("Consultas guardadas en consultas.json.")
+            print("Gracias por usar el gestor.")
+            break
 
-try: 
-    with open("consultas.json", "w", encoding="utf-8") as archivo:
-        json.dump(consultas, archivo, ensure_ascii=False, indent=4)
-except OSError:
-    print("No se pudieron guardar las consultas.")
-else:
-    print("Consultas guardadas en consultas.json.")
+    else:
+        print("Opción inválida: elegí 1, 2 o 3.")
