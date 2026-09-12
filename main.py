@@ -2,6 +2,8 @@
 
 print ("===Gestor de cobranzas ===")
 
+consultas = []
+
 while True:
 
     cliente = input("Nombre del cliente: ")
@@ -17,6 +19,13 @@ while True:
             print("Error: La deuda y el pago no pueden ser negativos.")
         else:
             saldo = deuda - pago 
+            consulta = {
+                "cliente": cliente,
+                "deuda": deuda,
+                "pago": pago,
+                "saldo": saldo,
+            }
+            consultas.append(consulta)
             if saldo == 0:
                 print("Deuda Cancelada")
             elif saldo > 0 :
@@ -29,3 +38,8 @@ while True:
     if continuar != "s":
         print("Gracias por usar el gestor.")
         break
+
+print("\n=== Resumen de consultas ===")
+
+for consulta in consultas:
+    print(f"{consulta['cliente']}: saldo ${consulta['saldo']:.2f}")
