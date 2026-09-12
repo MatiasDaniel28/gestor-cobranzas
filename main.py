@@ -51,10 +51,14 @@ while True:
             else:
                 print(f"Saldo pendiente: ${saldo:.2f}")
 
-    continuar = input("\n¿Consutar otro cliente? (s/n): ").strip().lower()
-    if continuar != "s":
-        print("Gracias por usar el gestor.")
-        break
+    while True:
+        continuar = input("\n¿Consutar otro cliente? (s/n): ").strip().lower()
+        if continuar in ("s", "n"):
+                break
+        print ("Respuesta inválida: escribí s o n.")
+    if continuar == "n":
+                print("Gracias por usar el gestor.")
+                break
 
 print("\n=== Resumen de consultas ===")
 

@@ -14,6 +14,7 @@ de un clinete a partir de una deuda incial y un pago.
 - Guarda las consultas en JSON al salir y las recupera al iniciar.
 - Rechaza nombres vacíos o compuestos únicamente por espacios.
 - Distingue entre saldo pendiente y saldo a favor.
+- Valida la respuesta para continuar: solo acepta s o n.
 
 ## Cómo ejecutarlo
 
