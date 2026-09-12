@@ -9,6 +9,16 @@ def mostrar_saldo(cliente, saldo):
         print(f"{cliente}: saldo pendiente ${saldo:.2f}")
 
 
+def buscar_consultas(consultas, nombre):
+    resultados = []
+
+    for consulta in consultas:
+        if consulta["cliente"].casefold() == nombre.strip().casefold():
+            resultados.append(consulta)
+
+    return resultados
+
+
 print("=== Gestor de cobranzas ===")
 
 try:
@@ -25,6 +35,7 @@ while True:
     print("1. Registrar consulta")
     print("2. Ver historial")
     print("3. Guardar y salir")
+    print("4. Buscar consultas por nombre")
 
     opcion = input("Elegí una opción: ").strip()
 
@@ -85,5 +96,20 @@ while True:
             print("Gracias por usar el gestor.")
             break
 
+    elif opcion == "4":
+        nombre = input("Nombre a buscar: ").strip()
+
+        if not nombre:
+            print("Error: ingresá un nombre.")
+            continue
+
+        resultados = buscar_consultas(consultas, nombre)
+
+        if not resultados:
+            print("No se encontraron consultas para ese nombre.")
+        else:
+            for consulta in resultados:
+                mostrar_saldo(consulta["cliente"], consulta["saldo"])
+
     else:
-        print("Opción inválida: elegí 1, 2 o 3.")
+        print("Opción inválida: elegí 1, 2, 3 o 4.")

@@ -16,6 +16,7 @@ de un clinete a partir de una deuda incial y un pago.
 - Distingue entre saldo pendiente y saldo a favor.
 - Menú para registrar consultas, ver el historial y guardar al salir.
 - Rechaza opciones de menú inválidas.
+- Busca consultas por nombre completo sin distinguir mayúsculas y minúsculas.
 
 ## Cómo ejecutarlo
 
