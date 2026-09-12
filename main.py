@@ -1,6 +1,9 @@
 import json
 
 
+def calcular_saldo(deuda, pago):
+     return deuda - pago
+
 
 
 def mostrar_saldo(cliente, saldo):
@@ -41,7 +44,7 @@ while True:
         if deuda < 0 or pago <0:
             print("Error: La deuda y el pago no pueden ser negativos.")
         else:
-            saldo = deuda - pago 
+            saldo = calcular_saldo(deuda, pago)
             consulta = {
                 "cliente": cliente,
                 "deuda": deuda,
