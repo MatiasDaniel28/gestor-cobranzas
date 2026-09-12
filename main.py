@@ -1,8 +1,15 @@
-
+import json
 
 print ("===Gestor de cobranzas ===")
 
-consultas = []
+try:
+    with open("consultas.json", "r", encoding="utf-8") as archivo:
+        consultas = json.load(archivo)
+except FileNotFoundErrir:
+    consultas = []
+except json.JSONDecodeError:
+    print("El archivo tiene un formato inválido. Revisalo antes de contuinuar.")
+    raise SystemExit
 
 while True:
 
@@ -43,3 +50,11 @@ print("\n=== Resumen de consultas ===")
 
 for consulta in consultas:
     print(f"{consulta['cliente']}: saldo ${consulta['saldo']:.2f}")
+
+try: 
+    with open("consultas.json", "w", encoding="utf-8") as archivo:
+        json.dump(consultas, archivo, ensure_ascii=False, indent=4)
+except OSError:
+    print("No se pudieron guardar las consultas.")
+else:
+    print("Consultas guardadas en consultas.json.")

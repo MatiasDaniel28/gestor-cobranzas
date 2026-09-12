@@ -9,6 +9,9 @@ de un clinete a partir de una deuda incial y un pago.
 - Calcular el saldo pendiente.
 - Informar si la deuda está cancelada o el pago supera la deuda.
 - Rechazar importes negativos y entradas no numéricas.
+- Permite consultar varios clientes sin reiniciar.
+- Guarda las consultas válidas en memoria y muestra un resumen al salir.
+- Guarda las consultas en JSON al salir y las recupera al iniciar.
 
 ## Cómo ejecutarlo
 
@@ -29,13 +32,12 @@ con try/except y control de versiones en Git y GitHub.
 
 ## Limitaciones actuales
 
-- Procesa un cliente por ejecución.
-- No guarda los datos al cerrar.
+- Cada ingreso crea una consulta independiente; no actualiza saldos de clientes existentes.
+- Los datos nuevos se guardan al salir normalmente del programa.
 - Utiliza float para los importes; está pendiente mejorar
   la precisión monetaria con Decimal.
 
   ## Próximas mejoras
 
-  - Consultar varios clientes sin reiniciar.
   - Guardar y recuperar los datos.
   - Agregar pruebas automáticas.
