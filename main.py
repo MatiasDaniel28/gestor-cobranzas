@@ -13,7 +13,11 @@ except json.JSONDecodeError:
 
 while True:
 
-    cliente = input("Nombre del cliente: ")
+    cliente = input("Nombre del cliente: ").strip()
+
+    if not cliente:
+        print("Error: ingresá un nombre.")
+        continue
 
     try:
         deuda = float(input("Deuda inicial: "))
@@ -39,8 +43,14 @@ while True:
                 print("Todavia tiene deuda")
             else:
                 print("El pago supera la deuda")
+
             print(f"\nCliente: {cliente}")
-            print(f"Saldo pendiente: ${saldo:.2f}")
+
+            if saldo < 0:
+                print(f"Saldo a favor: ${abs(saldo):.2f}")
+            else:
+                print(f"Saldo pendiente: ${saldo:.2f}")
+
     continuar = input("\n¿Consutar otro cliente? (s/n): ").strip().lower()
     if continuar != "s":
         print("Gracias por usar el gestor.")
@@ -49,7 +59,11 @@ while True:
 print("\n=== Resumen de consultas ===")
 
 for consulta in consultas:
-    print(f"{consulta['cliente']}: saldo ${consulta['saldo']:.2f}")
+    saldo = consulta["saldo"]
+    if saldo < 0:
+        print(f"{consulta['cliente']}: Saldo a favor: ${abs(saldo):.2f}")
+    else:
+        print(f"{consulta['cliente']}: Saldo pendiente: ${saldo:.2f}")
 
 try: 
     with open("consultas.json", "w", encoding="utf-8") as archivo:

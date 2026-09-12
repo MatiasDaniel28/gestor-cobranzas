@@ -12,6 +12,8 @@ de un clinete a partir de una deuda incial y un pago.
 - Permite consultar varios clientes sin reiniciar.
 - Guarda las consultas válidas en memoria y muestra un resumen al salir.
 - Guarda las consultas en JSON al salir y las recupera al iniciar.
+- Rechaza nombres vacíos o compuestos únicamente por espacios.
+- Distingue entre saldo pendiente y saldo a favor.
 
 ## Cómo ejecutarlo
 
