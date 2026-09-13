@@ -54,3 +54,8 @@ con try/except y control de versiones en Git y GitHub.
  '''
 
  Se comprueban pagos parciales, cancelaciónes de deuda y saldo a favor.
+
+ Se incluyen siete pruebas automáticas:
+ - Tres sobre cálculo de saldos.
+ - Cuatro sobre búsqueda: coincidencias, mayúsculas y espacios,
+   nombres inexistentes y rechazo de coincidencias parciales.

@@ -1,6 +1,6 @@
 import json
 from calculos import calcular_saldo
-
+from busquedas import buscar_consultas
 
 def mostrar_saldo(cliente, saldo):
     if saldo < 0:
@@ -9,14 +9,6 @@ def mostrar_saldo(cliente, saldo):
         print(f"{cliente}: saldo pendiente ${saldo:.2f}")
 
 
-def buscar_consultas(consultas, nombre):
-    resultados = []
-
-    for consulta in consultas:
-        if consulta["cliente"].casefold() == nombre.strip().casefold():
-            resultados.append(consulta)
-
-    return resultados
 
 
 print("=== Gestor de cobranzas ===")
