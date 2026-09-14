@@ -17,6 +17,8 @@ de un clinete a partir de una deuda incial y un pago.
 - Menú para registrar consultas, ver el historial y guardar al salir.
 - Rechaza opciones de menú inválidas.
 - Busca consultas por nombre completo sin distinguir mayúsculas y minúsculas.
+- Usa Decimal para calcular importes.
+- Guarda los importes como texto en JSON y los recupera como Decimal.
 
 ## Cómo ejecutarlo
 
@@ -39,8 +41,7 @@ con try/except y control de versiones en Git y GitHub.
 
 - Cada ingreso crea una consulta independiente; no actualiza saldos de clientes existentes.
 - Los datos nuevos se guardan al salir normalmente del programa.
-- Utiliza float para los importes; está pendiente mejorar
-  la precisión monetaria con Decimal.
+
 
   ## Próximas mejoras
 
@@ -55,7 +56,8 @@ con try/except y control de versiones en Git y GitHub.
 
  Se comprueban pagos parciales, cancelaciónes de deuda y saldo a favor.
 
- Se incluyen siete pruebas automáticas:
- - Tres sobre cálculo de saldos.
+ Se incluyen catorce pruebas automáticas:
+ - Cuatro sobre cálculo de saldos.
  - Cuatro sobre búsqueda: coincidencias, mayúsculas y espacios,
    nombres inexistentes y rechazo de coincidencias parciales.
+ - Seis de conversión de importes

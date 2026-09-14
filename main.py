@@ -1,6 +1,7 @@
 import json
-from calculos import calcular_saldo
 from busquedas import buscar_consultas
+from decimal import Decimal
+from calculos import calcular_saldo, convertir_importe
 
 def mostrar_saldo(cliente, saldo):
     if saldo < 0:
@@ -15,7 +16,13 @@ print("=== Gestor de cobranzas ===")
 
 try:
     with open("consultas.json", "r", encoding="utf-8") as archivo:
-        consultas = json.load(archivo)
+        consultas = json.load(archivo, parse_float=Decimal)
+
+        for consulta in consultas:
+            for campo in ("deuda", "pago", "saldo"):
+                consulta[campo] = Decimal(str(consulta[campo]))
+
+
 except FileNotFoundError:
     consultas = []
 except json.JSONDecodeError:
@@ -39,14 +46,10 @@ while True:
             continue
 
         try:
-            deuda = float(input("Deuda inicial: "))
-            pago = float(input("Pago recibido: "))
-        except ValueError:
-            print("Error: ingresá números. Para decimales, usá punto.")
-            continue
-
-        if deuda < 0 or pago < 0:
-            print("Error: la deuda y el pago no pueden ser negativos.")
+            deuda = convertir_importe(input("Deuda inicial: "))
+            pago = convertir_importe(input("Pago Recibido: "))
+        except ValueError as error:
+            print(f"Error: {error}")
             continue
 
         saldo = calcular_saldo(deuda, pago)
@@ -80,7 +83,13 @@ while True:
     elif opcion == "3":
         try:
             with open("consultas.json", "w", encoding="utf-8") as archivo:
-                json.dump(consultas, archivo, ensure_ascii=False, indent=4)
+                json.dump(
+                    consultas,
+                    archivo,
+                    default=str,
+                    ensure_ascii=False,
+                    indent=4,
+                )
         except OSError:
             print("No se pudieron guardar las consultas. Intentá nuevamente.")
         else:
