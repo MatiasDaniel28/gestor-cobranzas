@@ -9,7 +9,20 @@ def mostrar_saldo(cliente, saldo):
     else:
         print(f"{cliente}: saldo pendiente ${saldo:.2f}")
 
-
+def guardar_consultas(consultas):
+    try:
+        with open("consultas.json", "w", encoding="utf-8") as archivo:
+            json.dump(
+                consultas,
+                archivo,
+                default=str,
+                ensure_ascii=False,
+                indent=4,
+            )
+    except OSError:
+        print("No se pudieron guardar las consultas.")
+        return False
+    return True
 
 
 print("=== Gestor de cobranzas ===")
@@ -61,6 +74,10 @@ while True:
             "saldo": saldo,
         }
         consultas.append(consulta)
+        if guardar_consultas(consultas):
+            print("Consulta guardada en consultas.json.")
+        else:
+            print("Laconsulta quedó solo en memoria. Reintentá guardar con la opción 3.")
 
         if saldo == 0:
             print("Deuda cancelada")
@@ -81,18 +98,7 @@ while True:
                 mostrar_saldo(consulta["cliente"], consulta["saldo"])
 
     elif opcion == "3":
-        try:
-            with open("consultas.json", "w", encoding="utf-8") as archivo:
-                json.dump(
-                    consultas,
-                    archivo,
-                    default=str,
-                    ensure_ascii=False,
-                    indent=4,
-                )
-        except OSError:
-            print("No se pudieron guardar las consultas. Intentá nuevamente.")
-        else:
+        if guardar_consultas(consultas):
             print("Consultas guardadas en consultas.json.")
             print("Gracias por usar el gestor.")
             break

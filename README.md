@@ -19,6 +19,8 @@ de un clinete a partir de una deuda incial y un pago.
 - Busca consultas por nombre completo sin distinguir mayúsculas y minúsculas.
 - Usa Decimal para calcular importes.
 - Guarda los importes como texto en JSON y los recupera como Decimal.
+- Guarda automáticamente cada consulta válida.
+- Si falla el guardado, mantiene la consulta en memoria y permite reintentar con la opción 3.
 
 ## Cómo ejecutarlo
 
@@ -40,7 +42,6 @@ con try/except y control de versiones en Git y GitHub.
 ## Limitaciones actuales
 
 - Cada ingreso crea una consulta independiente; no actualiza saldos de clientes existentes.
-- Los datos nuevos se guardan al salir normalmente del programa.
 
 
   ## Próximas mejoras
