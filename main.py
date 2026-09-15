@@ -2,27 +2,13 @@ import json
 from busquedas import buscar_consultas
 from decimal import Decimal
 from calculos import calcular_saldo, convertir_importe
+from persistencia import guardar_consultas
 
 def mostrar_saldo(cliente, saldo):
     if saldo < 0:
         print(f"{cliente}: saldo a favor ${abs(saldo):.2f}")
     else:
         print(f"{cliente}: saldo pendiente ${saldo:.2f}")
-
-def guardar_consultas(consultas):
-    try:
-        with open("consultas.json", "w", encoding="utf-8") as archivo:
-            json.dump(
-                consultas,
-                archivo,
-                default=str,
-                ensure_ascii=False,
-                indent=4,
-            )
-    except OSError:
-        print("No se pudieron guardar las consultas.")
-        return False
-    return True
 
 
 print("=== Gestor de cobranzas ===")
