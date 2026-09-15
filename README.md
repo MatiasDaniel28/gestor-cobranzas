@@ -62,4 +62,4 @@ con try/except y control de versiones en Git y GitHub.
  - Cuatro sobre búsqueda: coincidencias, mayúsculas y espacios,
    nombres inexistentes y rechazo de coincidencias parciales.
  - Seis de conversión de importes
- -Una prueba de guardado.
+ -Dos pruebas de guardado.

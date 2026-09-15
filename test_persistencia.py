@@ -31,10 +31,19 @@ class TestGuardarConsultas(unittest.TestCase):
 
             esperado = [
                 {
-                "cliente": "Cliente de prueba",
-                "deuda": "1000.50",
-                "pago": "200.25",
-                "saldo": "800.25"
+                    "cliente": "Cliente de prueba",
+                    "deuda": "1000.50",
+                    "pago": "200.25",
+                    "saldo": "800.25",
                 }
             ]
             self.assertEqual(guardadas, esperado)
+
+    def test_devuelve_false_si_no_puede_guardar(self):
+        with tempfile.TemporaryDirectory() as carpeta:
+            ruta = Path(carpeta) / "carpeta_inexistente" / "consultas.json"
+
+            resultado = guardar_consultas([], ruta)
+
+            self.assertFalse(resultado)
+            self.assertFalse(ruta.exists())
